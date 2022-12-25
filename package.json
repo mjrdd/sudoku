@@ -18,8 +18,23 @@
 	],
 	"scripts": {
 		"build": "tsc && vite build",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"prepare": "npm run build"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mjrdd/sudoku.git"
+	},
+	"bugs": {
+		"url": "https://github.com/mjrdd/sudoku/issues"
+	},
+	"homepage": "https://github.com/mjrdd/sudoku#readme",
+	"keywords": [
+		"sudoku",
+		"generator",
+		"solver"
+	],
+	"author": "Mark Devilleres",
 	"devDependencies": {
 		"@types/node": "^18.11.17",
 		"typescript": "^4.9.4",
