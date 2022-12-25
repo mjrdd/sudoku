@@ -6,9 +6,13 @@ describe("generate", () => {
 		let board = generate();
 		expect(board).toBeTypeOf("object");
 		expect(board.length).toBe(9);
-		expect(board[Math.floor(Math.random() * 9)].length).toBe(9);
-		expect(board[Math.floor(Math.random() * 9)][Math.floor(Math.random() * 9)]).toBeTypeOf(
-			"number"
-		);
+
+		for (let y = 0; y < 9; y++) {
+			expect(board[y].length).toBe(9);
+
+			for (let x = 0; x < 9; x++) {
+				expect(board[y][x]).toBeTypeOf("number");
+			}
+		}
 	});
 });
