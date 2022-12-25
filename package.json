@@ -1,6 +1,6 @@
 {
   "name": "@mjrdd/sudoku",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Sudoku puzzle generator and solver",
   "type": "module",
   "license": "MIT",
