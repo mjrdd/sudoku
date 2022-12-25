@@ -86,6 +86,8 @@ function generate() {
 			trial -= 1;
 		}
 	}
+
+	return puzzle;
 }
 
 export default generate;
