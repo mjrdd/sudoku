@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateSudoku, removeHints } from "../src";
+import { generateSudoku, removeHints, solveSudoku } from "../src";
 
 describe("Generate Sudoku", () => {
 	let board = removeHints(generateSudoku(), 35);
@@ -21,5 +21,14 @@ describe("Generate Sudoku", () => {
 		const count = board.flat(2).filter((n) => n === 0).length;
 
 		expect(count).toBe(35);
+	});
+});
+
+describe("Solve Sudoku", () => {
+	let sudoku = generateSudoku();
+	let solutions = solveSudoku(removeHints(sudoku, 40));
+
+	it("Solves the puzzle", () => {
+		expect(solutions).toBe(sudoku);
 	});
 });
