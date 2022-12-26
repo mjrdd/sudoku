@@ -1,19 +1,19 @@
 import { checkBoard, checkNumber, shuffle } from "./utils";
 
-function generate() {
-	const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-	var puzzle: number[][] = [];
+function generateSudoku() {
+	let sudoku: number[][] = [];
 
 	for (let y = 0; y < 9; y++) {
-		puzzle[y] = [];
+		sudoku[y] = [];
 
 		for (let x = 0; x < 9; x++) {
-			puzzle[y][x] = 0;
+			sudoku[y][x] = 0;
 		}
 	}
 
-	function backtracker(board: typeof puzzle) {
+	function backtracker(board: typeof sudoku) {
 		let x = 0;
 		let y = 0;
 
@@ -36,11 +36,14 @@ function generate() {
 		return false;
 	}
 
-	backtracker(puzzle);
-	let count = 0;
-	let trial = 5;
+	backtracker(sudoku);
+	return sudoku;
+}
 
-	function solver(board: typeof puzzle) {
+function removeHints(sudoku: number[][], count: number) {
+	let counter = 0;
+
+	function solver(board: typeof sudoku) {
 		let x = 0;
 		let y = 0;
 
@@ -53,7 +56,7 @@ function generate() {
 					board[y][x] = i;
 
 					if (checkBoard(board)) {
-						count += 1;
+						counter += 1;
 						break;
 					}
 					if (solver(board)) return true;
@@ -66,28 +69,29 @@ function generate() {
 		return false;
 	}
 
-	while (trial > 0) {
+	while (count > 0) {
 		let x = ~~(Math.random() * 9);
 		let y = ~~(Math.random() * 9);
 
-		while (puzzle[y][x] === 0) {
+		while (sudoku[y][x] === 0) {
 			x = ~~(Math.random() * 9);
 			y = ~~(Math.random() * 9);
 		}
 
-		let num = puzzle[y][x];
-		puzzle[y][x] = 0;
+		let num = sudoku[y][x];
+		sudoku[y][x] = 0;
 
-		count = 0;
-		solver(JSON.parse(JSON.stringify(puzzle)));
+		counter = 0;
+		solver(JSON.parse(JSON.stringify(sudoku)));
 
-		if (count !== 1) {
-			puzzle[y][x] = num;
-			trial -= 1;
+		if (counter !== 1) {
+			sudoku[y][x] = num;
+		} else {
+			count -= 1;
 		}
 	}
 
-	return puzzle;
+	return sudoku;
 }
 
-export default generate;
+export { generateSudoku, removeHints };

@@ -1,1 +1,1 @@
-export { default as generate } from "./generator";
+export * from "./generator";

@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { generate } from "../src";
+import { generateSudoku, removeHints } from "../src";
 
-describe("generate", () => {
-	it("returns number array", () => {
-		let board = generate();
+describe("Generate Sudoku", () => {
+	let board = removeHints(generateSudoku(), 35);
+
+	it("Returns correct type", () => {
 		expect(board).toBeTypeOf("object");
 		expect(board.length).toBe(9);
 
@@ -14,5 +15,11 @@ describe("generate", () => {
 				expect(board[y][x]).toBeTypeOf("number");
 			}
 		}
+	});
+
+	it("Returns correct number of removed hints", () => {
+		const count = board.flat(2).filter((n) => n === 0).length;
+
+		expect(count).toBe(35);
 	});
 });
