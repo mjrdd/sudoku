@@ -41,7 +41,7 @@ function generateSudoku() {
 }
 
 function removeHints(sudoku: number[][], count: number) {
-	let counter = 0;
+	let solutions = 0;
 
 	function solver(board: typeof sudoku) {
 		let x = 0;
@@ -56,7 +56,7 @@ function removeHints(sudoku: number[][], count: number) {
 					board[y][x] = i;
 
 					if (checkBoard(board)) {
-						counter += 1;
+						solutions += 1;
 						break;
 					}
 					if (solver(board)) return true;
@@ -81,10 +81,10 @@ function removeHints(sudoku: number[][], count: number) {
 		let num = sudoku[y][x];
 		sudoku[y][x] = 0;
 
-		counter = 0;
+		solutions = 0;
 		solver(JSON.parse(JSON.stringify(sudoku)));
 
-		if (counter !== 1) {
+		if (solutions !== 1) {
 			sudoku[y][x] = num;
 		} else {
 			count -= 1;
