@@ -21,7 +21,7 @@ function checkNumber(board: number[][], x: number, y: number, num: number) {
 	);
 }
 
-function shuffle(arr: any[]) {
+function shuffle(arr: number[]) {
 	let i = arr.length;
 	let rand = 0;
 

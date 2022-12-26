@@ -3,7 +3,7 @@ import { checkBoard, checkNumber, shuffle } from "./utils";
 const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function generateSudoku() {
-	let sudoku: number[][] = [];
+	const sudoku: number[][] = [];
 
 	for (let y = 0; y < 9; y++) {
 		sudoku[y] = [];
@@ -21,7 +21,7 @@ function generateSudoku() {
 			for (x = 0; x < 9; x++) {
 				if (board[y][x] !== 0) continue;
 
-				for (let i of shuffle(nums)) {
+				for (const i of shuffle(nums)) {
 					if (!checkNumber(board, x, y, i)) continue;
 					board[y][x] = i;
 
@@ -78,7 +78,7 @@ function removeHints(sudoku: number[][], count: number) {
 			y = ~~(Math.random() * 9);
 		}
 
-		let num = sudoku[y][x];
+		const num = sudoku[y][x];
 		sudoku[y][x] = 0;
 
 		solutions = 0;

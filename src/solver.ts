@@ -30,5 +30,8 @@ export function solveSudoku(sudoku: number[][]) {
 	};
 
 	solver(sudoku);
+
+	console.log("Number of found solutions: ", solutions);
+
 	return sudoku;
 }

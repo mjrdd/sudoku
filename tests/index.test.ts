@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { generateSudoku, removeHints, solveSudoku } from "../src";
 
 describe("Generate Sudoku", () => {
-	let board = removeHints(generateSudoku(), 35);
+	const board = removeHints(generateSudoku(), 35);
 
 	it("Returns correct type", () => {
 		expect(board).toBeTypeOf("object");
@@ -25,8 +25,8 @@ describe("Generate Sudoku", () => {
 });
 
 describe("Solve Sudoku", () => {
-	let sudoku = generateSudoku();
-	let solutions = solveSudoku(removeHints(sudoku, 40));
+	const sudoku = generateSudoku();
+	const solutions = solveSudoku(removeHints(sudoku, 40));
 
 	it("Solves the puzzle", () => {
 		expect(solutions).toBe(sudoku);
