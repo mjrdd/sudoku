@@ -1,6 +1,4 @@
-import { checkBoard, checkNumber, shuffle } from "./utils";
-
-const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { validateBoard, validateNumber, shuffleArray } from "./utils";
 
 function generateSudoku() {
 	const sudoku: number[][] = [];
@@ -13,7 +11,7 @@ function generateSudoku() {
 		}
 	}
 
-	function backtracker(board: typeof sudoku) {
+	const backtracker = (board: typeof sudoku) => {
 		let x = 0;
 		let y = 0;
 
@@ -21,11 +19,11 @@ function generateSudoku() {
 			for (x = 0; x < 9; x++) {
 				if (board[y][x] !== 0) continue;
 
-				for (const i of shuffle(nums)) {
-					if (!checkNumber(board, x, y, i)) continue;
-					board[y][x] = i;
+				for (const num of shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9])) {
+					if (!validateNumber(board, x, y, num)) continue;
+					board[y][x] = num;
 
-					if (checkBoard(board)) return true;
+					if (validateBoard(board)) return true;
 					if (backtracker(board)) return true;
 				}
 				board[y][x] = 0;
@@ -34,7 +32,7 @@ function generateSudoku() {
 		}
 		board[y][x] = 0;
 		return false;
-	}
+	};
 
 	backtracker(sudoku);
 	return sudoku;
@@ -43,7 +41,7 @@ function generateSudoku() {
 function removeHints(sudoku: number[][], count: number) {
 	let solutions = 0;
 
-	function solver(board: typeof sudoku) {
+	const solver = (board: typeof sudoku) => {
 		let x = 0;
 		let y = 0;
 
@@ -52,10 +50,10 @@ function removeHints(sudoku: number[][], count: number) {
 				if (board[y][x] !== 0) continue;
 
 				for (let i = 1; i <= 9; i++) {
-					if (!checkNumber(board, x, y, i)) continue;
+					if (!validateNumber(board, x, y, i)) continue;
 					board[y][x] = i;
 
-					if (checkBoard(board)) {
+					if (validateBoard(board)) {
 						solutions += 1;
 						break;
 					}
@@ -67,7 +65,7 @@ function removeHints(sudoku: number[][], count: number) {
 		}
 		board[y][x] = 0;
 		return false;
-	}
+	};
 
 	while (count > 0) {
 		let x = ~~(Math.random() * 9);

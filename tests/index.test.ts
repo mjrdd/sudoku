@@ -2,8 +2,7 @@ import { describe, expect, it } from "vitest";
 import { generateSudoku, removeHints, solveSudoku } from "../src";
 
 describe("Generate Sudoku", () => {
-	const board = removeHints(generateSudoku(), 35);
-
+	const board = generateSudoku();
 	it("Returns correct type", () => {
 		expect(board).toBeTypeOf("object");
 		expect(board.length).toBe(9);
@@ -17,9 +16,9 @@ describe("Generate Sudoku", () => {
 		}
 	});
 
+	const hints = removeHints(board, 35);
 	it("Returns correct number of removed hints", () => {
-		const count = board.flat(2).filter((n) => n === 0).length;
-
+		const count = hints.flat(2).filter((n) => n === 0).length;
 		expect(count).toBe(35);
 	});
 });

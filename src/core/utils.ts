@@ -1,4 +1,4 @@
-function checkBoard(board: number[][]) {
+export function validateBoard(board: number[][]) {
 	for (let y = 0; y < 9; y++) {
 		for (let x = 0; x < 9; x++) {
 			if (board[y][x] === 0) return false;
@@ -7,7 +7,7 @@ function checkBoard(board: number[][]) {
 	return true;
 }
 
-function checkNumber(board: number[][], x: number, y: number, num: number) {
+export function validateNumber(board: number[][], x: number, y: number, num: number) {
 	const dx = ~~(x / 3) * 3;
 	const dy = ~~(y / 3) * 3;
 
@@ -21,7 +21,7 @@ function checkNumber(board: number[][], x: number, y: number, num: number) {
 	);
 }
 
-function shuffle(arr: number[]) {
+export function shuffleArray(arr: number[]) {
 	let i = arr.length;
 	let rand = 0;
 
@@ -32,5 +32,3 @@ function shuffle(arr: number[]) {
 	}
 	return arr;
 }
-
-export { checkBoard, checkNumber, shuffle };

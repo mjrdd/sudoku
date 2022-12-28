@@ -1,2 +1,2 @@
-export * from "./generator";
-export * from "./solver";
+export * from "./core/generator";
+export * from "./core/solver";

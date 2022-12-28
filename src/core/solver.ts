@@ -1,4 +1,4 @@
-import { checkBoard, checkNumber } from "./utils";
+import { validateBoard, validateNumber } from "./utils";
 
 export function solveSudoku(sudoku: number[][]) {
 	let solutions = 0;
@@ -12,10 +12,10 @@ export function solveSudoku(sudoku: number[][]) {
 				if (board[y][x] !== 0) continue;
 
 				for (let i = 1; i <= 9; i++) {
-					if (!checkNumber(board, x, y, i)) continue;
+					if (!validateNumber(board, x, y, i)) continue;
 					board[y][x] = i;
 
-					if (checkBoard(board)) {
+					if (validateBoard(board)) {
 						solutions += 1;
 						break;
 					}
@@ -30,7 +30,6 @@ export function solveSudoku(sudoku: number[][]) {
 	};
 
 	solver(sudoku);
-
 	console.log("Number of found solutions: ", solutions);
 
 	return sudoku;
