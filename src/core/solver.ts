@@ -1,7 +1,7 @@
-import { validateBoard, validateNumber } from "./utils";
+import { validateBoard, validateNumber, deepClone } from "./utils";
 
-export function solveSudoku(sudoku: number[][]) {
-	let solutions = 0;
+export function solve(sudoku: number[][]) {
+	const sudokuClone = deepClone(sudoku);
 
 	const solver = (board: typeof sudoku) => {
 		let x = 0;
@@ -15,10 +15,7 @@ export function solveSudoku(sudoku: number[][]) {
 					if (!validateNumber(board, x, y, i)) continue;
 					board[y][x] = i;
 
-					if (validateBoard(board)) {
-						solutions += 1;
-						break;
-					}
+					if (validateBoard(board)) return true;
 					if (solver(board)) return true;
 				}
 				board[y][x] = 0;
@@ -28,9 +25,6 @@ export function solveSudoku(sudoku: number[][]) {
 		board[y][x] = 0;
 		return false;
 	};
-
-	solver(sudoku);
-	console.log("Number of found solutions: ", solutions);
-
-	return sudoku;
+	solver(sudokuClone);
+	return sudokuClone;
 }

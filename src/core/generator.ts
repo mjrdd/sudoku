@@ -1,6 +1,6 @@
-import { validateBoard, validateNumber, shuffleArray } from "./utils";
+import { validateBoard, validateNumber, deepClone, shuffleArray, generateCoords } from "./utils";
 
-function generateSudoku() {
+export function generate() {
 	const sudoku: number[][] = [];
 
 	for (let y = 0; y < 9; y++) {
@@ -38,7 +38,9 @@ function generateSudoku() {
 	return sudoku;
 }
 
-function removeHints(sudoku: number[][], count: number) {
+export function removeHints(sudoku: number[][], count: number) {
+	const sudokuClone = deepClone(sudoku);
+	let counter = count;
 	let solutions = 0;
 
 	const solver = (board: typeof sudoku) => {
@@ -67,29 +69,26 @@ function removeHints(sudoku: number[][], count: number) {
 		return false;
 	};
 
-	while (count > 0) {
-		let x = ~~(Math.random() * 9);
-		let y = ~~(Math.random() * 9);
+	const coords = generateCoords();
 
-		while (sudoku[y][x] === 0) {
-			x = ~~(Math.random() * 9);
-			y = ~~(Math.random() * 9);
-		}
+	while (counter > 0) {
+		if (coords.length <= 0) break;
+		const rand = ~~(Math.random() * coords.length);
+		const { x, y } = coords[rand];
+		coords.splice(rand, 1);
 
-		const num = sudoku[y][x];
-		sudoku[y][x] = 0;
+		const num = sudokuClone[y][x];
+		sudokuClone[y][x] = 0;
 
 		solutions = 0;
-		solver(JSON.parse(JSON.stringify(sudoku)));
+		solver(deepClone(sudokuClone));
 
 		if (solutions !== 1) {
-			sudoku[y][x] = num;
+			sudokuClone[y][x] = num;
 		} else {
-			count -= 1;
+			counter -= 1;
 		}
 	}
 
-	return sudoku;
+	return sudokuClone;
 }
-
-export { generateSudoku, removeHints };

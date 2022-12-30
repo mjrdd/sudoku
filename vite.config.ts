@@ -1,13 +1,13 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import path from "path";
 
 export default defineConfig({
 	build: {
 		lib: {
-			entry: path.resolve(__dirname, "src/index.ts"),
-			name: "Sudoku",
-			fileName: "index"
+			entry: resolve(__dirname, "src/index.ts"),
+			name: "SudokuJS",
+			fileName: "sudoku"
 		}
 	},
 	plugins: [dts()]
