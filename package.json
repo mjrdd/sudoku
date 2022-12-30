@@ -1,6 +1,6 @@
 {
 	"name": "@mjrdd/sudoku",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Sudoku puzzle generator and solver",
 	"keywords": [
 		"javascript",
