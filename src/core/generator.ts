@@ -5,7 +5,6 @@ export function generate() {
 
 	for (let y = 0; y < 9; y++) {
 		sudoku[y] = [];
-
 		for (let x = 0; x < 9; x++) {
 			sudoku[y][x] = 0;
 		}
@@ -14,7 +13,6 @@ export function generate() {
 	const backtracker = (board: typeof sudoku) => {
 		let x = 0;
 		let y = 0;
-
 		for (y = 0; y < 9; y++) {
 			for (x = 0; x < 9; x++) {
 				if (board[y][x] !== 0) continue;
@@ -46,7 +44,6 @@ export function removeHints(sudoku: number[][], count: number) {
 	const solver = (board: typeof sudoku) => {
 		let x = 0;
 		let y = 0;
-
 		for (y = 0; y < 9; y++) {
 			for (x = 0; x < 9; x++) {
 				if (board[y][x] !== 0) continue;
@@ -70,9 +67,7 @@ export function removeHints(sudoku: number[][], count: number) {
 	};
 
 	const coords = generateCoords();
-
-	while (counter > 0) {
-		if (coords.length <= 0) break;
+	while (coords.length > 0 && counter > 0) {
 		const rand = ~~(Math.random() * coords.length);
 		const { x, y } = coords[rand];
 		coords.splice(rand, 1);

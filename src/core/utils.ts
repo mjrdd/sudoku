@@ -41,14 +41,6 @@ export function shuffleArray<T>(arr: T[]): T[] {
 }
 
 export function deepClone<T>(obj: T): T {
-	if (obj === null || typeof obj !== "object") return obj;
-
-	if (obj instanceof Date) {
-		const copy = new Date() as typeof obj;
-		copy.setTime(obj.getTime());
-		return copy as T;
-	}
-
 	if (obj instanceof Array) {
 		const copy = [] as typeof obj;
 		for (let i = 0, len = obj.length; i < len; i++) {
@@ -57,15 +49,5 @@ export function deepClone<T>(obj: T): T {
 		return copy as T;
 	}
 
-	if (obj instanceof Object) {
-		const copy = {} as typeof obj;
-		for (const key in obj) {
-			if (Object.prototype.hasOwnProperty.call(obj, key)) {
-				copy[key] = deepClone(obj[key]);
-			}
-		}
-		return copy as T;
-	}
-
-	throw new Error("Unable to copy obj! Its type isn't supported.");
+	return obj;
 }

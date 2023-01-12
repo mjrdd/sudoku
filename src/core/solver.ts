@@ -6,7 +6,6 @@ export function solve(sudoku: number[][]) {
 	const solver = (board: typeof sudoku) => {
 		let x = 0;
 		let y = 0;
-
 		for (y = 0; y < 9; y++) {
 			for (x = 0; x < 9; x++) {
 				if (board[y][x] !== 0) continue;
@@ -25,6 +24,7 @@ export function solve(sudoku: number[][]) {
 		board[y][x] = 0;
 		return false;
 	};
+
 	solver(sudokuClone);
 	return sudokuClone;
 }
