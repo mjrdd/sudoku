@@ -1,7 +1,7 @@
-import { validateBoard, validateNumber, deepClone } from "./utils";
+import { validateBoard, validateNumber } from "./utils";
 
 export function solve(sudoku: number[][]) {
-	const sudokuClone = deepClone(sudoku);
+	const sudokuClone = structuredClone(sudoku);
 
 	const solver = (board: typeof sudoku) => {
 		let x = 0;

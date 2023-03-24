@@ -8,17 +8,21 @@ export function validateBoard(board: number[][]) {
 }
 
 export function validateNumber(board: number[][], x: number, y: number, num: number) {
+	for (let i = 0; i < 9; i++) {
+		if (board[y][i] === num) return false;
+		if (board[i][x] === num) return false;
+	}
+
 	const dx = ~~(x / 3) * 3;
 	const dy = ~~(y / 3) * 3;
 
-	return !(
-		board[y].includes(num) ||
-		board.map((row) => row[x]).includes(num) ||
-		board
-			.slice(dy, dy + 3)
-			.reduce((block, row) => [...block, ...row.slice(dx, dx + 3)], [])
-			.includes(num)
-	);
+	for (let j = dy; j < dy + 3; j++) {
+		for (let i = dx; i < dx + 3; i++) {
+			if (board[j][i] === num) return false;
+		}
+	}
+
+	return true;
 }
 
 export function generateCoords() {
@@ -38,16 +42,4 @@ export function shuffleArray<T>(arr: T[]): T[] {
 		[arr[i], arr[j]] = [arr[j], arr[i]];
 	}
 	return arr;
-}
-
-export function deepClone<T>(obj: T): T {
-	if (obj instanceof Array) {
-		const copy = [] as typeof obj;
-		for (let i = 0, len = obj.length; i < len; i++) {
-			copy[i] = deepClone(obj[i]);
-		}
-		return copy as T;
-	}
-
-	return obj;
 }

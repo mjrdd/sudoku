@@ -1,4 +1,4 @@
-import { validateBoard, validateNumber, deepClone, shuffleArray, generateCoords } from "./utils";
+import { validateBoard, validateNumber, shuffleArray, generateCoords } from "./utils";
 
 export function generate() {
 	const sudoku: number[][] = [];
@@ -37,7 +37,7 @@ export function generate() {
 }
 
 export function removeHints(sudoku: number[][], count: number) {
-	const sudokuClone = deepClone(sudoku);
+	const sudokuClone = structuredClone(sudoku);
 	let counter = count;
 	let solutions = 0;
 
